@@ -19,7 +19,8 @@ func getData(month_ string, year_ string) {
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	checkError(err)
 
-	month.Name = doc.Find("ul").Text()
+	// This is where you scrape
+	month.Name = doc.Find("#mc_list_01_4050-list-mc-eebc9a21598585f5d8bea2ab08144d58").Text()
 
 	fmt.Println(month.Name)
 }

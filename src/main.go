@@ -11,7 +11,7 @@ import (
 // Month represents a month
 type Month struct {
 	Name   string   `json:"name"`
-	Events *[]Event `json:"stats"`
+	Events *[]Event `json:"events"`
 }
 
 // Event represents an event in a month
