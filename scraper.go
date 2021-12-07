@@ -26,7 +26,7 @@ func getData(month_ string, year_ string, month *Month) {
 			fmt.Println(" ")
 			id, ok := li.Attr("id")
 			if ok {
-				date := id[len(id)-2:]
+				date := string(year_) + "-" + string(month_) + "-" + id[len(id)-2:]
 				day.Day, err = strconv.Atoi(date)
 				fmt.Println(date)
 			}
