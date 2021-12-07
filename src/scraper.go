@@ -19,27 +19,39 @@ func getData(month_ string, year_ string) {
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	checkError(err)
 
-	// This is where you scrape
-	//month.Name = doc.Find("ul#list-mc-eebc9a21598585f5d8bea2ab08144d58").Text()
-
-	doc.Find("ul#list-mc-eebc9a21598585f5d8bea2ab08144d58").Each(func(i int, ul *goquery.Selection) {
+	doc.Find("ul#list-mc-eebc9a21598585f5d8bea2ab08144d58").Each(func(_ int, ul *goquery.Selection) {
 		ul.Find("li").Each(func(i int, li *goquery.Selection) {
+			fmt.Println(" ")
+
 			id, ok := li.Attr("id")
 			if ok {
-				println(id)
-			}
-			li.Find("div").Each(func(i int, div *goquery.Selection) {
-				var header = (div.Find("div").Find("h3"))
-				alt, ok := header.Find("img").Attr("alt")
-				if ok {
-					println(alt)
+				for j := 0; j < len(month.Days)-1; j++ {
+					month.Days[i].Events[j].Date = id
 				}
-				println(header.Contents().Text())
+
+				fmt.Println(id)
+			}
+
+			li.Find("div").Each(func(a int, div *goquery.Selection) {
+				var header = div.Find("div").Find("h3")
+				alt, ok := header.Find("img").Attr("alt")
+
+				// fmt.Println(a)
+
+				k := 0
+				if ok {
+					month.Days[i].Events[k].Category = alt
+					fmt.Println(alt)
+
+					month.Days[i].Events[k].Name = header.Contents().Text()
+					fmt.Println(header.Contents().Text())
+
+					fmt.Println(k)
+					k++
+				}
 			})
 		})
 	})
-
-	fmt.Println(month.Name)
 }
 
 func checkError(err error) {
