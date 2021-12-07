@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -39,7 +40,8 @@ func main() {
 	fmt.Println("Server started...")
 	fmt.Println(" * Running on http://localhost:" + port)
 	//fmt.Println(" * IP: localhost")
-	fmt.Println(" * Port: " + port)
+	log.Print(" * Port: " + port)
+	//fmt.Println(" * Port: " + port)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", fetchMonthResponse).Queries("month", "{month}", "year", "{year}").Methods("GET")
