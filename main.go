@@ -17,7 +17,7 @@ type Month struct {
 
 // Day
 type Day struct {
-	Day    int     `json:"day"`
+	Day    string  `json:"day"`
 	Events []Event `json:"events"`
 }
 

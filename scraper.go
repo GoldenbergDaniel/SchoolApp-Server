@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -27,7 +26,7 @@ func getData(month_ string, year_ string, month *Month) {
 			id, ok := li.Attr("id")
 			if ok {
 				date := string(year_) + "-" + string(month_) + "-" + id[len(id)-2:]
-				day.Day, err = strconv.Atoi(date)
+				day.Day = date
 				fmt.Println(date)
 			}
 
