@@ -42,7 +42,7 @@ func fetchMonthResponse(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 
-	getData(params["month"], params["year"])
+	month = getData(params["month"], params["year"])
 
 	json.NewEncoder(w).Encode(month)
 	fmt.Println("GET recieved from path " + r.URL.Path)
