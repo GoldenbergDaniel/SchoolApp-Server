@@ -1,1 +1,1 @@
-web: ./bin/src/main
+web: SchoolApp-Server
