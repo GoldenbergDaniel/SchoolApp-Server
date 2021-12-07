@@ -10,8 +10,13 @@ import (
 
 // Month represents a month
 type Month struct {
-	Name   string   `json:"name"`
-	Events *[]Event `json:"events"`
+	Days []Day `json:"days"`
+}
+
+// Day
+type Day struct {
+	Day    int     `json:"day"`
+	Events []Event `json:"events"`
 }
 
 // Event represents an event in a month
@@ -19,7 +24,7 @@ type Event struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Category    string `json:"category"`
-	Time        string `json:"time"`
+	Date        string `json:"date"`
 }
 
 var month *Month = new(Month)
@@ -42,7 +47,7 @@ func fetchMonthResponse(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 
-	month = getData(params["month"], params["year"])
+	getData(params["month"], params["year"], month)
 
 	json.NewEncoder(w).Encode(month)
 	fmt.Println("GET recieved from path " + r.URL.Path)
