@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -30,15 +31,17 @@ type Event struct {
 var month *Month = new(Month)
 
 func main() {
+	port := os.Getenv("PORT")
+
 	fmt.Println("Server started...")
-	fmt.Println(" * Running on http://127.0.0.1:8080/")
+	//fmt.Println(" * Running on ")
 	fmt.Println(" * IP: localhost")
-	fmt.Println(" * Port: 8080")
+	fmt.Println(" * Port: " + port)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", fetchMonthResponse).Queries("month", "{month}", "year", "{year}").Methods("GET")
 
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":"+port, r)
 }
 
 func fetchMonthResponse(w http.ResponseWriter, r *http.Request) {
