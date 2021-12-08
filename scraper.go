@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -41,7 +42,7 @@ func getData(month_ string, year_ string, month *Month) {
 
 				if header.Contents().Text() != "" && header.Contents().Text() != "Even" && header.Contents().Text() != "Odd" {
 					if ok {
-						event.Category = alt
+						event.Category = alt[strings.Index(alt, " ")+1:]
 						fmt.Println(alt)
 
 						event.Name = header.Contents().Text()
